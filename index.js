@@ -2,12 +2,29 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const { pool } = require("./config");
+const helmet = require("helmet");
+const compression = require("compression");
+const rateLimit = require("express-rate-limit");
 
 const app = express();
 
+const production = process.env.NODE_ENV === "production";
+const origin = {
+  // origin: production ? "https://www.example.com" : "*"
+  origin: production ? "*" : "*"
+};
+const limiter = rateLimit({
+  windowMs: 1 * 60 * 1000, // 1 minute
+  max: 10 // 10 requests,
+});
+
+app.use(compression());
+app.use(helmet());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(cors());
+app.use(cors(origin));
+
+app.use(limiter);
 
 const getAnswers = (request, response) => {
   pool.query("SELECT * FROM toe", (error, results) => {
