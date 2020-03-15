@@ -36,21 +36,23 @@ const getResults = (request, response) => {
 };
 
 const addAnswer = (request, response) => {
-  const { question, answer } = JSON.parse(request.body);
-  console.log({ question, answer });
+  console.log(response.body);
+  console.log(JSON.parse(response.body));
+  // const { question, answer } = JSON.parse(request.body);
+  // console.log({ question, answer });
 
-  pool.query(
-    "INSERT INTO toe (question, answer) VALUES ($1, $2)",
-    [question, answer],
-    error => {
-      if (error) {
-        throw error;
-      }
-      response
-        .status(201)
-        .json({ status: "success", message: "Answer added." });
-    }
-  );
+  // pool.query(
+  //   "INSERT INTO toe (question, answer) VALUES ($1, $2)",
+  //   [question, answer],
+  //   error => {
+  //     if (error) {
+  //       throw error;
+  //     }
+  //     response
+  //       .status(201)
+  //       .json({ status: "success", message: "Answer added." });
+  //   }
+  // );
 };
 
 app
