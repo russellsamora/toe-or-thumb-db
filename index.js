@@ -36,8 +36,8 @@ const getResults = (request, response) => {
 };
 
 const addAnswer = (request, response) => {
-  console.log(request.body);
-  const { question, answer } = request.body;
+  const { question, answer } = JSON.parse(request.body);
+  console.log({ question, answer });
 
   pool.query(
     "INSERT INTO toe (question, answer) VALUES ($1, $2)",
