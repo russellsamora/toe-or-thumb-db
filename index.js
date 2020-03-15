@@ -36,8 +36,8 @@ const getResults = (request, response) => {
 };
 
 const addAnswer = (request, response) => {
-  console.log(response.body);
-  console.log(JSON.parse(response.body));
+  console.log(request.body);
+  console.log(JSON.parse(request.body));
   // const { question, answer } = JSON.parse(request.body);
   // console.log({ question, answer });
 
