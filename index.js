@@ -36,6 +36,7 @@ const getResults = (request, response) => {
 };
 
 const addAnswer = (request, response) => {
+  console.log(request.body);
   const { question, answer } = request.body;
 
   pool.query(
