@@ -26,7 +26,7 @@ app.use(cors(origin));
 
 app.use(limiter);
 
-const getAnswers = (request, response) => {
+const getResults = (request, response) => {
   pool.query("SELECT * FROM toe", (error, results) => {
     if (error) {
       throw error;
@@ -54,10 +54,13 @@ const addAnswer = (request, response) => {
 
 app
   .route("/answers")
-  // GET endpoint
-  .get(getAnswers)
   // POST endpoint
   .post(addAnswer);
+
+app
+  .route("/results")
+  // GET endpoint
+  .get(getResults);
 
 // Start server
 app.listen(process.env.PORT || 3002, () => {
